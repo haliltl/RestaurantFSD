@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container">
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Welcome to Halil's ClassyCloset Creations</h5>
+            <p class="card-text">I am certain you will find what you are looking for, clothes from top fashion brands including Balenciaga, Stone Island, and Dior.</p>
+            <a href="/items" class="btn btn-primary">Closet</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

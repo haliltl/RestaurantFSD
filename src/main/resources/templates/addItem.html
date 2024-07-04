@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/header :: header"></div>
+    <h2>Add Item</h2>
+
+    <!-- Success Message -->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+
+    <!-- Form for Adding Item -->
+    <form th:action="@{/items}" th:object="${item}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" required>
+            <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" th:errors="*{name}"></div>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <select th:field="*{brand}" class="form-control" id="brand" required>
+                <option th:value="BALENCIAGA">Balenciaga</option>
+                <option th:value="STONE_ISLAND">Stone Island</option>
+                <option th:value="DIOR">Dior</option>
+            </select>
+            <div th:if="${#fields.hasErrors('brand')}" class="alert alert-danger" th:errors="*{brand}"></div>
+        </div>
+        <div class="form-group">
+            <label for="yearOfCreation">Year of Creation</label>
+            <input type="number" th:field="*{yearOfCreation}" class="form-control" id="yearOfCreation" required>
+            <div th:if="${#fields.hasErrors('yearOfCreation')}" class="alert alert-danger" th:errors="*{yearOfCreation}"></div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" th:field="*{price}" class="form-control" id="price" step="0.01" required>
+            <div th:if="${#fields.hasErrors('price')}" class="alert alert-danger" th:errors="*{price}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Item</button>
+    </form>
+</div>
+</body>
+</html>

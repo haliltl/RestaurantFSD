@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/header :: header"></div>
+    <h2>Item List</h2>
+    <button onclick="location.href='/items?page=0&size=10&sortBy=brand'" class="btn btn-secondary mb-3">Filter by Brand</button>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><a th:href="@{/items(page=0, size=${pageSize}, sortBy='name')}">Name</a></th>
+            <th><a th:href="@{/items(page=0, size=${pageSize}, sortBy='brand')}">Brand</a></th>
+            <th><a th:href="@{/items(page=0, size=${pageSize}, sortBy='yearOfCreation')}">Year of Creation</a></th>
+            <th><a th:href="@{/items(page=0, size=${pageSize}, sortBy='price')}">Price</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${itemPage.content}">
+            <td th:text="${item.name}">Name</td>
+            <td th:text="${item.brand}">Brand</td>
+            <td th:text="${item.yearOfCreation}">Year</td>
+            <td th:text="${item.price}">Price</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <span th:text="'Page ' + ${currentPage + 1} + ' of ' + ${itemPage.totalPages}"></span>
+    </div>
+    <div>
+        <ul class="pagination">
+            <li th:if="${currentPage > 0}" class="page-item">
+                <a th:href="@{/items(page=${currentPage - 1}, size=${pageSize}, sortBy=${sortBy})}" class="page-link">Previous</a>
+            </li>
+            <li th:if="${currentPage < itemPage.totalPages - 1}" class="page-item">
+                <a th:href="@{/items(page=${currentPage + 1}, size=${pageSize}, sortBy=${sortBy})}" class="page-link">Next</a>
+            </li>
+        </ul>
+    </div>
+    <button onclick="location.href='/items/new'" class="btn btn-primary">Add Item</button>
+</div>
+</body>
+</html>
